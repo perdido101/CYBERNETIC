@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/neural-content-synthesizer/', // Replace with your repo name
+  base: '/CYBERNETIC/', // Update to match your repo name exactly
   plugins: [react()],
   server: {
     proxy: {
