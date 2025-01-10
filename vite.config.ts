@@ -5,17 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/CYBERNETIC/', // Update to match your repo name exactly
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://api.anthropic.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true,
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   }
 }) 
