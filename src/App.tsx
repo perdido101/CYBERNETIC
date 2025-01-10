@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MatrixRain from './components/MatrixRain';
 import { motion, AnimatePresence } from 'framer-motion';
 import { remixContent } from './api/remix';
@@ -41,6 +41,10 @@ function App() {
     setCopied(index);
     setTimeout(() => setCopied(null), 2000);
   };
+
+  useEffect(() => {
+    console.log('App mounted at:', window.location.pathname);
+  }, []);
 
   return (
     <div className="min-h-screen relative">

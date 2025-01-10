@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || process.env.VITE_ANTHROPIC_API_KEY;
+const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY;
 
 const anthropic = new Anthropic({
   apiKey: API_KEY,
@@ -30,13 +30,12 @@ export async function remixContent(content: string, style: string = 'casual'): P
       prompt = `Transform this content into 2-3 concise sentences while maintaining its core meaning: ${content}`;
   }
 
-  // Add explicit length instruction
   prompt = `${prompt}\n\nIMPORTANT: Respond with exactly 2-3 sentences, no more. Be impactful but brief.`;
 
   try {
     const message = await anthropic.messages.create({
       model: "claude-3-sonnet-20240229",
-      max_tokens: 200, // Reduced token limit to encourage brevity
+      max_tokens: 200,
       messages: [
         {
           role: "user",
@@ -46,11 +45,15 @@ export async function remixContent(content: string, style: string = 'casual'): P
       temperature: style.includes('cybernetic') ? 0.9 : 0.7,
     });
 
-    if (!message.content[0]?.text) {
+    const responseText = message.content[0].type === 'text' 
+      ? message.content[0].text
+      : '';
+
+    if (!responseText) {
       throw new Error('Neural synthesis failed - no output detected');
     }
 
-    return message.content[0].text.trim();
+    return responseText.trim();
   } catch (error) {
     console.error('Neural interface disrupted:', error);
     throw error instanceof Error 
