@@ -7,6 +7,11 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   </head>
   <body>
+    <script>
+      window.ENV = {
+        VITE_ANTHROPIC_API_KEY: '%VITE_ANTHROPIC_API_KEY%'
+      };
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

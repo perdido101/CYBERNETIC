@@ -15,6 +15,6 @@ export default defineConfig({
     }
   },
   define: {
-    'process.env.VITE_ANTHROPIC_API_KEY': JSON.stringify(process.env.VITE_ANTHROPIC_API_KEY)
+    __API_KEY__: JSON.stringify('')
   }
 }) 

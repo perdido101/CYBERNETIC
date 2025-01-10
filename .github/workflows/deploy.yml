@@ -26,6 +26,8 @@ jobs:
       - run: npm run build
         env:
           VITE_ANTHROPIC_API_KEY: ${{ secrets.VITE_ANTHROPIC_API_KEY }}
+      - run: |
+          sed -i "s/%VITE_ANTHROPIC_API_KEY%/${{ secrets.VITE_ANTHROPIC_API_KEY }}/g" dist/index.html
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
