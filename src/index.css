@@ -27,4 +27,10 @@
   button {
     @apply transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,255,70,0.3)];
   }
+}
+
+.solana-gradient {
+  background: linear-gradient(45deg, #00FFA3, #DC1FFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 } 

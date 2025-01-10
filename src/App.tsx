@@ -3,6 +3,7 @@ import MatrixRain from './components/MatrixRain';
 import { motion, AnimatePresence } from 'framer-motion';
 import { remixContent } from './api/remix';
 import { FiCopy, FiCheck, FiCpu, FiServer } from 'react-icons/fi';
+import solanaLogo from './assets/solana-icon.svg';
 
 function App() {
   const [content, setContent] = useState('');
@@ -60,9 +61,13 @@ function App() {
           <h1 className="text-6xl font-bold text-white mb-4 glow-text font-cyber">
             Neural Content Synthesizer
           </h1>
-          <p className="text-xl text-cyan-400 font-mono">
+          <p className="text-xl text-cyan-400 font-mono mb-2">
             [v2.0.45] Quantum-Enhanced Content Transformation Matrix
           </p>
+          <div className="flex items-center justify-center gap-3 text-sm text-cyan-300 font-mono">
+            <img src={solanaLogo} alt="Solana" className="h-5 w-5" />
+            <span className="solana-gradient">Solana Hackathon Participant • Official Solana Partner</span>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
