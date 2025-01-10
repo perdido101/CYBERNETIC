@@ -6,4 +6,7 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv
-} 
+}
+
+declare module '@anthropic-ai/sdk'
+declare module 'framer-motion' 

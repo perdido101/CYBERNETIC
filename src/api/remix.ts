@@ -1,13 +1,21 @@
 import Anthropic from '@anthropic-ai/sdk';
 
+// Add fallback and error handling for API key
 const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY;
+if (!API_KEY) {
+  console.error('Neural interface error: API key not found');
+}
 
 const anthropic = new Anthropic({
-  apiKey: API_KEY,
+  apiKey: API_KEY || '', // Provide empty string as fallback
   dangerouslyAllowBrowser: true
 });
 
 export async function remixContent(content: string, style: string = 'casual'): Promise<string> {
+  if (!API_KEY) {
+    throw new Error('Neural synthesis failed: API key not configured');
+  }
+
   if (!content) {
     throw new Error('Content stream empty');
   }

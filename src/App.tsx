@@ -31,6 +31,7 @@ function App() {
       setOutputs(results);
     } catch (error) {
       console.error('Neural interface disrupted:', error);
+      setOutputs(['Neural synthesis failed: Please check API configuration']);
     } finally {
       setLoading(false);
     }
