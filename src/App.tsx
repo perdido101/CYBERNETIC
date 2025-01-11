@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { remixContent } from './api/remix';
 import { FiCopy, FiCheck, FiCpu, FiServer } from 'react-icons/fi';
 import solanaLogo from './assets/solana-icon.svg';
+import { FaXTwitter } from 'react-icons/fa6';
 
 function App() {
   const [content, setContent] = useState('');
@@ -24,12 +25,8 @@ function App() {
     
     setLoading(true);
     try {
-      const results = await Promise.all([
-        remixContent(content, style),
-        remixContent(content, 'cybernetic'),
-        remixContent(content, 'very-cybernetic'),
-      ]);
-      setOutputs(results);
+      const result = await remixContent(content, style);
+      setOutputs(result);
     } catch (error) {
       console.error('Neural interface disrupted:', error);
       setOutputs(['Neural synthesis failed: Please check API configuration']);
@@ -42,6 +39,12 @@ function App() {
     await navigator.clipboard.writeText(text);
     setCopied(index);
     setTimeout(() => setCopied(null), 2000);
+  };
+
+  const handleTweet = async (tweet: string) => {
+    const tweetText = encodeURIComponent(tweet);
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
+    window.open(twitterUrl, '_blank');
   };
 
   useEffect(() => {
@@ -134,31 +137,40 @@ function App() {
                     [ Awaiting neural data synthesis... ]
                   </p>
                 ) : (
-                  outputs.map((output, index) => (
+                  outputs.map((tweet, tweetIndex) => (
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      key={tweetIndex}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: tweetIndex * 0.1 }}
                       className="bg-black/50 border border-cyan-500/30 rounded-lg p-6 relative group hover:border-cyan-400/50 transition-colors"
                     >
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm text-cyan-400 font-mono">
-                          Neural Pattern {index + 1} [{styles[index]?.label || 'Enhanced'}]
+                          Neural Tweet {tweetIndex + 1}
                         </span>
-                        <button
-                          onClick={() => handleCopy(output, index)}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          {copied === index ? (
-                            <FiCheck className="text-cyan-400" />
-                          ) : (
-                            <FiCopy className="text-cyan-400 hover:text-cyan-300" />
-                          )}
-                        </button>
+                        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button
+                            onClick={() => handleTweet(tweet)}
+                            className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                            title="Post to X/Twitter"
+                          >
+                            <FaXTwitter className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleCopy(tweet, tweetIndex)}
+                            title="Copy to clipboard"
+                          >
+                            {copied === tweetIndex ? (
+                              <FiCheck className="text-cyan-400" />
+                            ) : (
+                              <FiCopy className="text-cyan-400 hover:text-cyan-300" />
+                            )}
+                          </button>
+                        </div>
                       </div>
                       <p className="text-white font-mono">
-                        {output}
+                        {tweet}
                       </p>
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 animate-pulse rounded-lg pointer-events-none" />
                     </motion.div>
