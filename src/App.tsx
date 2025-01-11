@@ -145,27 +145,27 @@ function App() {
                       transition={{ delay: index * 0.1 }}
                       className="bg-black/50 border border-cyan-500/30 rounded-lg p-6 relative group hover:border-cyan-400/50 transition-colors"
                     >
-                      <div className="flex justify-between items-start mb-2">
+                      <div className="flex justify-between items-center mb-2">
                         <span className="text-sm text-cyan-400 font-mono">
                           Neural Pattern {index + 1}
                         </span>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center space-x-2">
                           <button
                             onClick={() => handleTweet(tweet)}
-                            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-cyan-500/10 rounded"
+                            className="flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 rounded-full transition-all"
                             title="Post to X/Twitter"
                           >
-                            <FaXTwitter className="w-4 h-4" />
+                            <FaXTwitter size={16} />
                           </button>
                           <button
                             onClick={() => handleCopy(tweet, index)}
-                            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-cyan-500/10 rounded"
+                            className="flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 rounded-full transition-all"
                             title="Copy to clipboard"
                           >
                             {copied === index ? (
-                              <FiCheck className="w-4 h-4" />
+                              <FiCheck size={16} />
                             ) : (
-                              <FiCopy className="w-4 h-4" />
+                              <FiCopy size={16} />
                             )}
                           </button>
                         </div>
