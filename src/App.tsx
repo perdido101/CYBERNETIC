@@ -3,8 +3,8 @@ import MatrixRain from './components/MatrixRain';
 import { motion, AnimatePresence } from 'framer-motion';
 import { remixContent } from './api/remix';
 import { FiCopy, FiCheck, FiCpu, FiServer } from 'react-icons/fi';
+import { FaTwitter } from 'react-icons/fa';
 import solanaLogo from './assets/solana-icon.svg';
-import { FaXTwitter } from 'react-icons/fa6';
 
 function App() {
   const [content, setContent] = useState('');
@@ -155,7 +155,7 @@ function App() {
                             className="flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-900/30 rounded-full transition-all"
                             title="Post to X/Twitter"
                           >
-                            <FaXTwitter size={16} />
+                            <FaTwitter size={16} />
                           </button>
                           <button
                             onClick={() => handleCopy(tweet, index)}
