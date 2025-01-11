@@ -137,34 +137,35 @@ function App() {
                     [ Awaiting neural data synthesis... ]
                   </p>
                 ) : (
-                  outputs.map((tweet, tweetIndex) => (
+                  outputs.map((tweet, index) => (
                     <motion.div
-                      key={tweetIndex}
+                      key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: tweetIndex * 0.1 }}
+                      transition={{ delay: index * 0.1 }}
                       className="bg-black/50 border border-cyan-500/30 rounded-lg p-6 relative group hover:border-cyan-400/50 transition-colors"
                     >
-                      <div className="flex justify-between items-center mb-2">
+                      <div className="flex justify-between items-start mb-2">
                         <span className="text-sm text-cyan-400 font-mono">
-                          Neural Tweet {tweetIndex + 1}
+                          Neural Pattern {index + 1}
                         </span>
-                        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleTweet(tweet)}
-                            className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-cyan-500/10 rounded"
                             title="Post to X/Twitter"
                           >
                             <FaXTwitter className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => handleCopy(tweet, tweetIndex)}
+                            onClick={() => handleCopy(tweet, index)}
+                            className="text-cyan-400 hover:text-cyan-300 transition-colors p-2 hover:bg-cyan-500/10 rounded"
                             title="Copy to clipboard"
                           >
-                            {copied === tweetIndex ? (
-                              <FiCheck className="text-cyan-400" />
+                            {copied === index ? (
+                              <FiCheck className="w-4 h-4" />
                             ) : (
-                              <FiCopy className="text-cyan-400 hover:text-cyan-300" />
+                              <FiCopy className="w-4 h-4" />
                             )}
                           </button>
                         </div>
